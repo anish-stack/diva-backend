@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 const MiniProduct = new mongoose.Schema({
+    image:{
+        type: String
+
+    },
     Productname: {
         type: String
     },

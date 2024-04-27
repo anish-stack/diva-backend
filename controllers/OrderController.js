@@ -192,3 +192,23 @@ exports.checkStatus = async (req, res) => {
         });
 
 };
+
+//Get My Orders
+exports.GetMyOrders = async (req, res) => {
+    try {
+        const user = req.user;
+        const foundOrders = await Orders.find({ 'UserInfo.userid': user._id });
+
+        res.status(200).json({
+            success: true,
+            msg: "Orders Found Successfully",
+            data: foundOrders
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            msg: "Internal Server Error"
+        });
+    }
+};

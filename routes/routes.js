@@ -4,7 +4,7 @@ const routes = express.Router()
 const multer = require('multer')
 const { register, LoginUser, Logout, getAllUsers, getTokenFromCookies } = require('../controllers/Usercontrollers')
 const { isAuthenticatedUser } = require('../middlewares/auth')
-const { CreateOrder, checkStatus } = require('../controllers/OrderController')
+const { CreateOrder, checkStatus, GetMyOrders } = require('../controllers/OrderController')
 
 const storage = multer.memoryStorage()
 const multerUploads = multer({ storage }).array('images')
@@ -36,6 +36,7 @@ routes.patch('/update-products/:id', updateProduct)
 //====================ORDERS ROUTES=========================//
 routes.post('/Make-Orders',isAuthenticatedUser,CreateOrder)
 routes.post('/status/:txnId',checkStatus)
+routes.get('/get-My-Orders',isAuthenticatedUser,GetMyOrders)
 
 
 
