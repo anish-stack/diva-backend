@@ -32,8 +32,8 @@ exports.createProducts = async (req, res) => {
         const emptyFields = [];
 
         if (!productName) emptyFields.push('productName');
-        if (!discountPrice) emptyFields.push('discountPrice');
-        if (!mainPrice) emptyFields.push('mainPrice');
+        // if (!discountPrice) emptyFields.push('discountPrice');
+        // if (!mainPrice) emptyFields.push('mainPrice');
         if (!percentage) emptyFields.push('percentage');
         if (!collectionName) emptyFields.push('collectionName');
         if (!description) emptyFields.push('description');

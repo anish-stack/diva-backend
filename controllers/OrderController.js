@@ -3,6 +3,7 @@ const merchantId = "PGTESTPAYUAT"
 const apiKey = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399"
 const crypto = require('crypto');
 const axios = require('axios');
+const { search } = require('../routes/routes');
 async function doPayment(amount, Merchant, transactionId, res, req) {
     try {
         const user = await req.user;
@@ -212,3 +213,48 @@ exports.GetMyOrders = async (req, res) => {
         });
     }
 };
+exports.getAllOrder = async (req,res) =>{
+    try {
+        const AdminOrders = await Orders.find()
+        // console.log(AdminOrders)
+        if(AdminOrders.length === 0){
+            return res.status(400).json({
+                success:false,
+                msg:"No Order Found"
+            })
+        }
+        res.status(201).json({
+            success:true,
+            data:AdminOrders,
+            msg:" Order Found"
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+exports.getSingleOrder = async (req,res) =>{
+    try {
+        const {id} = req.params
+        if(!id){
+            return res.status(402).json({
+                success:false,
+                msg:"Id is invalid"
+            })
+        }
+        const searchOrder = await Orders.findById(id)
+        if(searchOrder.length === 0){
+            return res.status(402).json({
+                success:false,
+                msg:"Order is Not Found"
+            })
+        }
+        res.status(201).json({
+            success:true,
+            data:searchOrder,
+            msg:"Order is  Found"
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
